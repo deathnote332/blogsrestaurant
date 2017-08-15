@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -55,5 +56,17 @@ class LoginController extends Controller
     public function loginPage(){
 
     }
+
+    public function loginWaiter(Request $request){
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password,'user_type'=>4])) {
+            // Authentication passed...
+            $message['isLogin'] = 'Login Successfully';
+        }else{
+            $message['isLogin'] = 'Invalid credentials';
+        }
+        return json_encode($message);
+    }
+
+
 
 }
