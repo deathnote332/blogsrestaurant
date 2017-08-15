@@ -21,9 +21,9 @@ $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 $this->post('register', 'Auth\RegisterController@register');
 
 //authentication for waiter
-$this->post('loginWaiter', 'Auth\LoginController@loginWaiter');
+$this->post('/loginWaiter', 'Auth\LoginController@loginWaiter');
 //registration for waiter
-$this->post('createWaiter', 'Auth\RegisterController@createWaiter');
+$this->post('/createWaiter', 'Auth\RegisterController@createWaiter');
 
 //getcategory
 Route::get('/getCategory'                 ,        'CategoryController@getCategory');

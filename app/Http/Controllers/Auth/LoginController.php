@@ -58,7 +58,7 @@ class LoginController extends Controller
     }
 
     public function loginWaiter(Request $request){
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password,'user_type'=>4])) {
+        if (Auth::attempt(['email' =>$request->email, 'password' => $request->password,'user_type'=>4])) {
             // Authentication passed...
             $message['isLogin'] = 'Login Successfully';
         }else{
