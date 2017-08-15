@@ -25,6 +25,9 @@ $this->post('loginWaiter', 'Auth\LoginController@loginWaiter');
 //registration for waiter
 $this->post('createWaiter', 'Auth\RegisterController@createWaiter');
 
+//getcategory
+Route::get('/getCategory'                 ,        'CategoryController@getCategory');
+Route::post('/getFoodList'                 ,        'CategoryFoodList@getFoodList');
 
 
 Route::get('/switch-ajax-transaction'                 ,        'KitchenController@loadajaxPage');
