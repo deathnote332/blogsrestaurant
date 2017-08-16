@@ -5,8 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Food_List extends Model
+class MenuList extends Model
 {
-    protected  $table = 'food_list';
+    protected  $table = 'menus_list';
     protected  $primaryKey = 'id';
 }

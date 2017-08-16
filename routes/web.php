@@ -20,14 +20,9 @@ $this->get('logout', 'Auth\LoginController@logout')->name('logout');
 $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 $this->post('register', 'Auth\RegisterController@register');
 
-//authentication for waiter
-$this->post('/loginWaiter', 'Auth\LoginController@loginWaiter');
-//registration for waiter
-$this->post('/createWaiter', 'Auth\RegisterController@createWaiter');
 
-//getcategory
-Route::get('/getCategory'                 ,        'CategoryController@getCategory');
-Route::post('/getFoodList'                 ,        'CategoryFoodList@getFoodList');
+
+
 
 
 Route::get('/switch-ajax-transaction'                 ,        'KitchenController@loadajaxPage');
@@ -70,4 +65,17 @@ Route::group(['prefix' => 'cashier','middleware' => 'isCashier'], function(){
     Route::get('/transaction/{id}'                    ,         'CashierController@transactionPage');
 });
 
+
+Route::group(['prefix' => 'waiter'], function(){
+    //authentication for waiter
+    Route::post('/loginWaiter'             ,        'MenuController@loginWaiter');
+    //registration for waiter
+    Route::post('/createWaiter'             ,     'MenuController@createWaiter');
+
+
+    Route::get('/getMenu'                 ,        'MenuController@getMenu');
+    Route::post('/getMenuList'            ,        'MenuController@getMenuList');
+    Route::post('/updateWaiter'            ,        'MenuController@updateWaiter');
+
+});
 

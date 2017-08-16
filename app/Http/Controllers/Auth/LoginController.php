@@ -46,8 +46,7 @@ class LoginController extends Controller
             return 'admin/clients';
         }elseif(Auth::user()->user_type == 3){
             return 'cashier/cashier';
-        }
-        else{
+        }else{
             return '/dashboard';
         }
 
@@ -57,15 +56,7 @@ class LoginController extends Controller
 
     }
 
-    public function loginWaiter(Request $request){
-        if (Auth::attempt(['email' =>$request->email, 'password' => $request->password,'user_type'=>4])) {
-            // Authentication passed...
-            $message['isLogin'] = 'Login Successfully';
-        }else{
-            $message['isLogin'] = 'Invalid credentials';
-        }
-        return json_encode($message);
-    }
+
 
 
 
