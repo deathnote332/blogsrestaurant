@@ -9,6 +9,7 @@ use App\MenuList;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
@@ -114,6 +115,9 @@ class MenuController extends Controller
 
     }
 
-
+    public function getTable(){
+        $table = DB::table('restaurant_table')->get();
+        return json_encode($table);
+    }
 
 }

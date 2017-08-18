@@ -71,11 +71,14 @@ Route::group(['prefix' => 'waiter'], function(){
     Route::post('/loginWaiter'             ,        'MenuController@loginWaiter');
     //registration for waiter
     Route::post('/createWaiter'             ,     'MenuController@createWaiter');
+    Route::post('/updateWaiter'            ,        'MenuController@updateWaiter');
+
+    Route::get('/getTable'             ,     'MenuController@getTable');
 
 
     Route::get('/getMenu'                 ,        'MenuController@getMenu');
     Route::post('/getMenuList'            ,        'MenuController@getMenuList');
-    Route::post('/updateWaiter'            ,        'MenuController@updateWaiter');
+
 
 });
 
