@@ -22,3 +22,8 @@
         </div>
     </div>
 </div>
+<script>
+    jQuery("#clickable").click(function(){
+
+    });
+</script>

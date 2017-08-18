@@ -79,6 +79,8 @@ Route::group(['prefix' => 'waiter'], function(){
     Route::get('/getMenu'                 ,        'MenuController@getMenu');
     Route::post('/getMenuList'            ,        'MenuController@getMenuList');
 
+    Route::get('/getCart'            ,        'MenuController@getCart');
+
 
 });
 
