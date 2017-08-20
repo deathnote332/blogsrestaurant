@@ -130,4 +130,24 @@ class MenuController extends Controller
         return json_encode($table);
     }
 
+    public function getTemporaryCart(Request $request){
+
+        $order_id = 1;
+        $table = DB::table('order_items')
+            ->join('menus_list','order_items.product_id','menus_list.id')
+            ->select('order_items.quantity','menus_list.id','menus_list.food_name')
+            ->where('order_items.order_id',$order_id)
+            ->get();
+        return json_encode($table);
+
+    }
+	
+	public function insertOrder(Request $request){
+
+        $data["data"] = $request->cartList;
+        return json_encode($data);
+
+
+    }
+
 }
