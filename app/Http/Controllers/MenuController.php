@@ -144,7 +144,11 @@ class MenuController extends Controller
 	
 	public function insertOrder(Request $request){
         $dataArray = $request->cartList;
-        $data["message"] = "Success";
+        foreach ($dataArray as $key=> $val){
+            $data["message"]  = $val[1];
+        }
+
+    
         return json_encode($data);
 
 
