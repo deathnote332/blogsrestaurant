@@ -132,24 +132,74 @@ class MenuController extends Controller
 
     public function getTemporaryCart(Request $request){
 
-        $order_id = 1;
-        $table = DB::table('order_items')
-            ->join('menus_list','order_items.product_id','menus_list.id')
-            ->select('order_items.quantity','menus_list.id','menus_list.food_name')
-            ->where('order_items.order_id',$order_id)
+        $user_id = $request->user_id;
+        $table = DB::table('temp_order')
+            ->join('menus_list','temp_order.product_id','menus_list.id')
+            ->select('temp_order.quantity','temp_order.product_id','temp_order.id','menus_list.price','menus_list.food_name','menus_list.image')
+			->where('temp_order.user_id',$user_id)
             ->get();
         return json_encode($table);
 
     }
 	
 	public function insertOrder(Request $request){
-        $dataArray = $request->cartList;
-        foreach ($dataArray as $key=> $val){
-            $data["message"]  = $val[1];
-        }
 
-    
-        return json_encode($data);
+        $food_id = $request->food_id;
+        $food_quantity = $request->food_quantity;
+		$user_id = $request->user_id;
+		
+		$checkData = DB::table('temp_order')->where('user_id',$user_id)->where('product_id',$food_id)->first();
+		if($checkData == null || $checkData == ''){
+			$insertData = DB::table('temp_order')->insert(['product_id'=>$food_id,'quantity'=>$food_quantity,'user_id'=>$user_id]);
+		}else{
+			$old_qty = $checkData->quantity;
+			$new_qty = $old_qty + $food_quantity;
+			$insertData = DB::table('temp_order')->where('user_id',$user_id)->where('product_id',$food_id)->update(['quantity'=>$new_qty]);
+		}
+		
+		
+		if($insertData){
+			$message['message']= "Successfully added to cart"; 
+		}else{
+			$message['message']= "Error occured"; 
+		}
+			
+       return json_encode($message);
+
+
+    }
+	
+	public function updateFoodCart(Request $request){
+
+        $cart_id = $request->id;
+        $quantity = $request->quantity;
+        
+		
+		$updateData = DB::table('temp_order')->where('id',$cart_id)->update(['quantity'=>$quantity]);
+		
+		if($updateData){
+			$message['message']= "Successfully updated."; 
+		}else{
+			$message['message']= "Error occured"; 
+		}
+			
+       return json_encode($message);
+
+
+    }
+	
+	public function deleteFoodCart(Request $request){
+
+        $cart_id = $request->id;
+     
+
+		$deleteData = DB::table('temp_order')->where('id',$cart_id)->delete();
+		
+		
+		$message['message']= "Successfully deleted."; 
+		
+			
+       return json_encode($message);
 
 
     }
